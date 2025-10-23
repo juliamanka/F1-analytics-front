@@ -1,0 +1,44 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  min-width: 200px;
+}
+
+canvas {
+  width: 100% !important;
+  height: 500px !important;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  padding: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+.full-table {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.no-data {
+  color: #777;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.chart-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 24px;
+  position: relative;
+  width: 100%;
+  min-height: 500px; 
+  height: 60vh;      
+  padding: 12px;
+}

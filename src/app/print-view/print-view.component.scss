@@ -1,0 +1,28 @@
+@media print {
+  /* Hide everything except the dashboard */
+  app-shell,
+  nav,
+  .filters,
+  button,
+  mat-form-field,
+  mat-toolbar,
+  .mat-mdc-paginator {
+    display: none !important;
+  }
+
+  .print-page {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }
+
+  .print-dashboard {
+    box-shadow: none;
+    border: none;
+  }
+
+  @page {
+    size: A4 landscape;
+    margin: 10mm;
+  }
+}

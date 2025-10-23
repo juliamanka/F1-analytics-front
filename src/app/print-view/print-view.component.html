@@ -1,0 +1,10 @@
+<div class="print-page" *ngIf="results.length">
+  <app-measurements-dashboard-view
+    [results]="results"
+    [series]="series">
+  </app-measurements-dashboard-view>
+</div>
+
+<div *ngIf="!results.length" class="loading">
+  <p>Loading data for print...</p>
+</div>
