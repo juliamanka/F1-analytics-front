@@ -1,0 +1,45 @@
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+/build
+
+# dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
+/.vscode
+/.project
+/.classpath
+/.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+typings/
+
+# system files
+.DS_Store
+Thumbs.db
+
+# environment files
+/src/environments/environment*.ts
+
+# Angular build cache
+/.angular/cache
+
+# optional npm lock files (choose one if needed)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

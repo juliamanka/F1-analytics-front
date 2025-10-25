@@ -16,5 +16,7 @@ export const routes: Routes = [
   { path: 'change-password', component: ChangePasswordComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'series/new', component: SeriesFormComponent },
+  { path: 'series/:id', component: SeriesFormComponent },
   { path: '**', redirectTo: '' }
 ];
