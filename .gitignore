@@ -37,7 +37,7 @@ Thumbs.db
 /src/environments/environment*.ts
 
 # Angular build cache
-/.angular/cache
+.angular/cache
 
 # optional npm lock files (choose one if needed)
 package-lock.json
