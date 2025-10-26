@@ -1,0 +1,70 @@
+<div class="admin-container">
+    <mat-card>
+      <div class="header">
+        <h2>Manage Series</h2>
+        <button mat-raised-button color="primary" (click)="newSeries()">Add Series</button>
+      </div>
+  
+      <table mat-table [dataSource]="series" class="mat-elevation-z2 full-width-table">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let s">{{ s.name }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="seriesId">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let s">{{ s.seriesId }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="unit">
+          <th mat-header-cell *matHeaderCellDef>Unit</th>
+          <td mat-cell *matCellDef="let s">{{ s.unit }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="minValue">
+          <th mat-header-cell *matHeaderCellDef>Min</th>
+          <td mat-cell *matCellDef="let s">{{ s.minValue }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="maxValue">
+          <th mat-header-cell *matHeaderCellDef>Max</th>
+          <td mat-cell *matCellDef="let s">{{ s.maxValue }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="color">
+          <th mat-header-cell *matHeaderCellDef>Color</th>
+          <td mat-cell *matCellDef="let s">
+            <span class="color-box" [style.background]="s.color"></span>
+            {{ s.color }}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="measurementType">
+          <th mat-header-cell *matHeaderCellDef>Type</th>
+          <td mat-cell *matCellDef="let s">{{ s.measurementType }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let s">
+              <button mat-icon-button color="primary" (click)="edit(s)" matTooltip="Edit series">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="delete(s.id)" matTooltip="Delete series">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-card>
+  
+    <app-series-form
+      *ngIf="editing"
+      [model]="editing"
+      (save)="save($event)"
+      (cancel)="editing = null">
+    </app-series-form>
+  </div>

@@ -29,9 +29,15 @@ import { SeriesDto } from '../models/series.dto';
     <mat-form-field><mat-label>Unit</mat-label>
       <input matInput formControlName="unit" (keyup.enter)="submit()">
     </mat-form-field>
-    <mat-form-field><mat-label>Color</mat-label>
-      <input matInput formControlName="color" placeholder="#1976d2" (keyup.enter)="submit()">
-    </mat-form-field>
+    <mat-form-field appearance="outline">
+  <mat-label>Color</mat-label>
+  <input
+    matInput
+    type="color"
+    formControlName="color"
+    style="height: 40px; padding: 0;"
+  />
+</mat-form-field>
     <mat-form-field><mat-label>Measurement Type</mat-label>
       <input matInput formControlName="measurementType" (keyup.enter)="submit()">
     </mat-form-field>

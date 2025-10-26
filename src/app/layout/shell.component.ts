@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../core/services/auth.service';
 import { NgIf } from '@angular/common';
@@ -32,10 +33,19 @@ import { NgIf } from '@angular/common';
     .content { padding: 20px; }
   `]
 })
-export class ShellComponent {
-  constructor(public auth: AuthService) {}
+export class ShellComponent implements OnInit{
+  protected auth = inject(AuthService);
+  private snack = inject(MatSnackBar);
+  private router = inject(Router);
 
-  logout() {
+
+  ngOnInit() {
+    this.auth.initAutoLogoutOnStartup();
+  }
+
+  logout(): void {
     this.auth.logout();
+    this.snack.open('You have been logged out.', 'Close', { duration: 3000 });
+    this.router.navigate(['/']); 
   }
 }

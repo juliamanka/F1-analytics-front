@@ -1,0 +1,30 @@
+.admin-container {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  mat-card {
+    padding: 16px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  
+  .full-width-table {
+    width: 100%;
+  }
+  
+  .color-box {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
