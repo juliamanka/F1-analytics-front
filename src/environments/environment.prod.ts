@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'http://localhost:5000/api'
+  apiBaseUrl: 'f1-api-edejfwe4fhbcgegj.polandcentral-01.azurewebsites.net/api'
 };
