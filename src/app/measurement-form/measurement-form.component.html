@@ -1,0 +1,52 @@
+<h2 mat-dialog-title>
+    {{ isEditMode ? 'Edit Measurement' : 'Add New Measurement' }}
+  </h2>
+  
+  <mat-dialog-content [formGroup]="form" class="form-container">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <!-- Series -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Series</mat-label>
+        <mat-select formControlName="seriesId">
+          <mat-option *ngFor="let s of seriesOptions" [value]="s.seriesId">
+            {{ s.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="f.seriesId.hasError('required')">Series is required</mat-error>
+      </mat-form-field>
+  
+      <!-- Value -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Value (N)</mat-label>
+        <input
+        matInput
+        type="number"
+        formControlName="value"
+        step="0.01"
+        placeholder="e.g. -1234.56"
+      />
+        <mat-error *ngIf="f.value.hasError('required')">Value is required</mat-error>
+        <mat-error *ngIf="f.value.hasError('min') || f.value.hasError('max')">
+          Value must be between -5000 and 0 N
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Timestamp -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Timestamp</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="timestamp" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="f.timestamp.hasError('required')">
+          Timestamp is required
+        </mat-error>
+      </mat-form-field>
+  
+      <div class="actions">
+        <button mat-stroked-button color="warn" type="button" (click)="cancel()">Cancel</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="loading">
+            {{ isEditMode ? 'Save Changes' : 'Add Measurement' }}
+          </button>
+      </div>
+    </form>
+  </mat-dialog-content>

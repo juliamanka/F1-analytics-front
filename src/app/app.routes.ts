@@ -7,6 +7,7 @@ import { LoginComponent } from './auth/login.component';
 import { ChangePasswordComponent } from './auth/change-password.component';
 import { RegisterComponent } from './register/register.component';
 import { authGuard } from './core/guards/auth.guard';
+import { MeasurementFormComponent } from './measurement-form/measurement-form.comopnent';
 
 export const routes: Routes = [
   { path: '', component: ChartDashboardComponent },
@@ -18,5 +19,6 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'series/new', component: SeriesFormComponent,   canActivate: [authGuard]  },
   { path: 'series/:id', component: SeriesFormComponent,   canActivate: [authGuard]  },
+  { path: 'measurements', component: MeasurementFormComponent, canActivate: [authGuard] },
   { path: '**', redirectTo: '' }
 ];

@@ -1,0 +1,31 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 350px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  
+  button[mat-flat-button],
+  button[mat-stroked-button] {
+    min-width: 120px;
+  }
+  
+  mat-error {
+    font-size: 0.8rem;
+  }
+
+  mat-form-field.ng-invalid.ng-touched .mat-mdc-form-field-outline {
+    color: #f44336;
+    border-color: #f44336;
+  }

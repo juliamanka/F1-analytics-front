@@ -42,3 +42,125 @@ canvas {
   height: 60vh;      
   padding: 12px;
 }
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.chart-container {
+  position: relative;
+}
+
+.full-table {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.actions-header {
+  text-align: right;
+}
+
+.actions-cell {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.no-data {
+  text-align: center;
+  color: #888;
+  margin-top: 1rem;
+}
+
+button[mat-fab] {
+  width: 72px;
+  height: 72px;
+  box-shadow: 0 6px 15px rgba(63, 81, 181, 0.4);
+  background: linear-gradient(135deg, #3f51b5, #2196f3);
+  color: white;
+  transition: all 0.25s ease;
+  border: none;
+}
+
+button[mat-fab]:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(63, 81, 181, 0.6);
+  background: linear-gradient(135deg, #303f9f, #1976d2);
+}
+
+button[mat-fab] mat-icon {
+  font-size: 32px;
+}
+
+.table-container {
+  margin-top: 24px;
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.table-header h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.table-header button[mat-flat-button] {
+  font-weight: 500;
+  text-transform: none;
+  gap: 6px;
+}
+
+.table-header mat-icon {
+  vertical-align: middle;
+}
+
+/* === Normalize row height and icon alignment === */
+tr.mat-row,
+tr.mat-header-row {
+  height: 48px; /* consistent row height */
+}
+
+td.mat-cell,
+th.mat-header-cell {
+  vertical-align: middle;
+  padding: 8px 16px;
+  line-height: 1.4;
+}
+
+td.mat-cell,
+th.mat-header-cell {
+  vertical-align: middle;
+}
+
+/* === Actions column normalization === */
+.actions-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  min-height: 48px;
+}
+
+.actions-cell button {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.actions-cell mat-icon {
+  font-size: 20px;
+  line-height: 20px;
+}

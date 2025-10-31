@@ -15,6 +15,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MeasurementFormComponent } from '../measurement-form/measurement-form.comopnent';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-measurements-dashboard-view',
@@ -24,8 +29,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatPaginatorModule, MatTableModule,
     MatFormFieldModule, MatInputModule,
     MatSelectModule, MatButtonModule,
-    MatDatepickerModule, MatNativeDateModule
-  ],  templateUrl: './measurements-dashboard-view.component.html',
+    MatDatepickerModule, MatNativeDateModule, MatIconModule 
+  ],  
+  templateUrl: './measurements-dashboard-view.component.html',
   styleUrls: ['./measurements-dashboard-view.component.scss']
 })
 export class MeasurementsDashboardViewComponent implements OnChanges {
@@ -39,6 +45,10 @@ export class MeasurementsDashboardViewComponent implements OnChanges {
 selectedSeriesIds: string[] = [];
 startDate?: Date;
 endDate?: Date;
+
+private dialog = inject(MatDialog);
+private snack = inject(MatSnackBar);
+protected auth = inject(AuthService);
 
 applyFilters() {
   const toLocalDateString = (d?: Date) =>
@@ -222,5 +232,40 @@ resetFilters() {
 
   printCurrentView() {
     window.print();
+  }
+
+  openAddDialog() {
+    const dialogRef = this.dialog.open(MeasurementFormComponent, {
+      width: '420px',
+      data: null
+    });
+  
+    dialogRef.componentInstance.seriesOptions = this.series;
+    dialogRef.componentInstance.saved.subscribe(() => this.applyFilters());
+  }
+  
+  openEditDialog(m: MeasurementDto) {
+    const dialogRef = this.dialog.open(MeasurementFormComponent, {
+      width: '420px',
+      data: m
+    });
+  
+    dialogRef.componentInstance.measurement = m;
+    dialogRef.componentInstance.seriesOptions = this.series;
+    dialogRef.componentInstance.saved.subscribe(() => this.applyFilters());
+  }
+  
+  deleteMeasurement(m: MeasurementDto) {
+    if (!confirm(`Delete measurement for ${m.seriesName}?`)) return;
+    this.measurements.remove(m.id).subscribe({
+      next: () => {
+        this.snack.open('Measurement deleted', 'Close', { duration: 2000 });
+        this.applyFilters();
+      },
+      error: err => {
+        console.error(err);
+        this.snack.open('Failed to delete measurement', 'Close', { duration: 2500 });
+      }
+    });
   }
 }

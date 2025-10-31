@@ -35,27 +35,65 @@
     #chartRef>
   </canvas>
   
-  <div *ngIf="pagedData.length; else noData">
+  <div *ngIf="pagedData.length; else noData" class="table-container">
+    <div class="table-header">
+      <h3>Measurements</h3>
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="openAddDialog()"
+        *ngIf="auth.isAuthenticated()">
+        <mat-icon>add</mat-icon>
+        Add Measurement
+      </button>
+    </div>
+  
     <table mat-table [dataSource]="pagedData" class="mat-elevation-z2 full-table">
+      <!-- Series -->
       <ng-container matColumnDef="seriesName">
         <th mat-header-cell *matHeaderCellDef>Series</th>
         <td mat-cell *matCellDef="let r">{{ r.seriesName || r.seriesId }}</td>
       </ng-container>
-
+  
+      <!-- Value -->
       <ng-container matColumnDef="value">
-        <th mat-header-cell *matHeaderCellDef>Value</th>
+        <th mat-header-cell *matHeaderCellDef>Value (N)</th>
         <td mat-cell *matCellDef="let r">{{ r.value }}</td>
       </ng-container>
-
+  
+      <!-- Timestamp -->
       <ng-container matColumnDef="timestamp">
         <th mat-header-cell *matHeaderCellDef>Timestamp</th>
         <td mat-cell *matCellDef="let r">{{ r.timestamp | date:'short' }}</td>
       </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      <!-- Actions (only if logged in) -->
+      <ng-container matColumnDef="actions" *ngIf="auth.isAuthenticated()">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let r">
+          <button mat-icon-button color="primary" (click)="openEditDialog(r)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteMeasurement(r)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr
+        mat-header-row
+        *matHeaderRowDef="auth.isAuthenticated()
+          ? ['seriesName','value','timestamp','actions']
+          : ['seriesName','value','timestamp']">
+      </tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: auth.isAuthenticated()
+          ? ['seriesName','value','timestamp','actions']
+          : ['seriesName','value','timestamp'];">
+      </tr>
     </table>
-
+  
     <mat-paginator
       [length]="totalCount"
       [pageSize]="pageSize"
@@ -63,8 +101,7 @@
       (page)="onPageChange($event)">
     </mat-paginator>
   </div>
-
+  
   <ng-template #noData>
     <p class="no-data">No data to display</p>
   </ng-template>
-</div>

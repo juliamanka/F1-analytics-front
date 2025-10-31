@@ -37,19 +37,23 @@ export class MeasurementsService {
     if (filter.startDate) params['StartDate'] = filter.startDate;
     if (filter.endDate) params['EndDate'] = filter.endDate;
 
-    return this.api.get<MeasurementDto[]>('/measurement/all', params);
+    return this.api.get<MeasurementDto[]>('/measurements/all', params);
   }
 
-  get(id: number){ return this.api.get<MeasurementDto>(`/measurement/${id}`); }
+  get(id: number){ return this.api.get<MeasurementDto>(`/measurements/${id}`); }
+
   create(payload: { seriesId: string; timestamp: string; value: number; }){
-    return this.api.post<MeasurementDto>('/measurement', payload);
+    return this.api.post<MeasurementDto>('/measurements', payload);
   }
+
   update(id: number, payload: Partial<{ seriesId: string; timestamp: string; value: number; notes?: string; }>){
-    return this.api.put<void>(`/measurement/${id}`, payload);
+    return this.api.put<void>(`/measurements/${id}`, payload);
   }
-  remove(id: number){ return this.api.delete<void>(`/measurement/${id}`); }
+
+  remove(id: number){ return this.api.delete<void>(`/measurements/${id}`); }
+
   export(filter: MeasurementFilter = {}){
     const params = new URLSearchParams(filter as any).toString();
-    window.open(`${location.origin}/api/measurement/export?${params}`, '_blank');
+    window.open(`${location.origin}/api/measurements/export?${params}`, '_blank');
   }
 }
