@@ -5,7 +5,7 @@ Projekt powstał w ramach zajęć akademickich i prezentuje praktyczne wykorzyst
 
 ---
 
-##� Spis treści
+## Spis treści
 
 1. [Opis projektu](#opis-projektu)
 2. [Technologie](#technologie)
