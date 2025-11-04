@@ -43,7 +43,8 @@ export class MeasurementFormComponent implements OnInit {
   form!: FormGroup;
   isEditMode = false;
   loading = false;
-
+  static seriesCache: any[] = [];
+  
   constructor(
     private fb: FormBuilder,
     private service: MeasurementsService,
@@ -53,25 +54,47 @@ export class MeasurementFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.isEditMode = !!this.measurement;
-
+  
     this.form = this.fb.group({
-      seriesId: [
-        this.measurement?.seriesId || '',
-        [Validators.required]
-      ],
+      seriesId: [this.measurement?.seriesId || '', [Validators.required]],
       value: [
         this.measurement?.value ?? '',
-        [Validators.required, Validators.min(-5000), Validators.max(0)]
+        [Validators.required] 
       ],
       timestamp: [
         this.measurement?.timestamp ? new Date(this.measurement.timestamp) : '',
         [Validators.required, notInFutureValidator]
       ]
     });
+  
+    if (!MeasurementFormComponent.seriesCache.length && this.seriesOptions?.length) {
+      MeasurementFormComponent.seriesCache = this.seriesOptions;
+    }
+  
+    this.form.get('seriesId')?.valueChanges.subscribe(seriesId => {
+      const selectedSeries = MeasurementFormComponent.seriesCache.find(s => s.seriesId === seriesId);
+      const valueControl = this.form.get('value');
+  
+      if (selectedSeries && valueControl) {
+        const { minValue, maxValue } = selectedSeries;
+  
+        valueControl.setValidators([
+          Validators.required,
+          Validators.min(minValue),
+          Validators.max(maxValue)
+        ]);
+        valueControl.updateValueAndValidity();
+      }
+    });
   }
 
   get f() {
     return this.form.controls;
+  }
+
+  get selectedSeries() {
+    const id = this.form?.get('seriesId')?.value;
+    return MeasurementFormComponent.seriesCache.find(s => s.seriesId === id);
   }
 
   submit(): void {
@@ -127,6 +150,7 @@ export class MeasurementFormComponent implements OnInit {
   cancel(): void {
     this.dialogRef.close();
   }
+
 }
 
 export function notInFutureValidator(): ValidatorFn {
