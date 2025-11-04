@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { MeasurementsService } from '../core/services/measurements.service';
 import { MeasurementDto } from '../models/measurement.dto';
 import { SeriesDto } from '../models/series.dto';
-import { Chart, ChartConfiguration, registerables, ScatterDataPoint } from 'chart.js';
+import { ChartConfiguration, ScatterDataPoint } from 'chart.js';
 import 'chartjs-adapter-date-fns';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';

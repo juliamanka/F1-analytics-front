@@ -3,7 +3,7 @@ import { ChartDashboardComponent } from './dashboard/chart-dashboard.component';
 import { PrintViewComponent } from './print-view/print-view.component';
 import { SeriesAdminComponent } from './series/series-admin.component';
 import { SeriesFormComponent } from './series/series-form.component';
-import { LoginComponent } from './auth/login.component';
+import { LoginComponent } from './login/login.component';
 import { ChangePasswordComponent } from './auth/change-password.component';
 import { RegisterComponent } from './register/register.component';
 import { authGuard } from './core/guards/auth.guard';

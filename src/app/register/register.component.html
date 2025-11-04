@@ -1,39 +1,46 @@
-<form [formGroup]="registerForm" (ngSubmit)="register()">
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Username</mat-label>
-    <input matInput formControlName="userName" />
-    <mat-error *ngIf="registerForm.get('userName')?.hasError('required')">
-      Username is required
-    </mat-error>
-  </mat-form-field>
+<div class="register-container">
+  <h2>Create Account</h2>
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email" type="email" />
-    <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
-      Email is required
-    </mat-error>
-    <mat-error *ngIf="registerForm.get('email')?.hasError('email')">
-      Please enter a valid email address
-    </mat-error>
-  </mat-form-field>
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="userName" />
+      <mat-error *ngIf="registerForm.get('userName')?.hasError('required')">
+        Username is required
+      </mat-error>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Password</mat-label>
-    <input matInput formControlName="password" type="password" />
-    <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
-      Password is required
-    </mat-error>
-    <mat-error *ngIf="registerForm.get('password')?.hasError('weakPassword')">
-      Password must be at least 8 characters and include upper, lower, and special characters
-    </mat-error>
-  </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" />
+      <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+        Email is required
+      </mat-error>
+      <mat-error *ngIf="registerForm.get('email')?.hasError('email')">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
 
-  <button
-    mat-flat-button
-    color="primary"
-    type="submit"
-    [disabled]="registerForm.invalid || loading">
-    {{ loading ? 'Registering…' : 'Register' }}
-  </button>
-</form>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" type="password" />
+      <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
+        Password is required
+      </mat-error>
+      <mat-error *ngIf="registerForm.get('password')?.hasError('weakPassword')">
+        Password must be at least 8 characters and include upper, lower, and special characters
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="registerForm.invalid || loading">
+      {{ loading ? 'Registering…' : 'Register' }}
+    </button>
+  </form>
+
+  <p *ngIf="success" class="success">{{ success }}</p>
+  <p *ngIf="error" class="error">{{ error }}</p>
+</div>
