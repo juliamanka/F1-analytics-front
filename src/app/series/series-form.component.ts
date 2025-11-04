@@ -59,8 +59,8 @@ export class SeriesFormComponent {
     seriesId: ['', [Validators.required, Validators.maxLength(50)]],
     name: ['', [Validators.required, Validators.maxLength(255)]],
     description: [''],
-    minValue: [0, Validators.required],
-    maxValue: [100, Validators.required],
+    minValue: [-1500, Validators.required],
+    maxValue: [-50, Validators.required],
     unit: ['N', [Validators.required, Validators.maxLength(10)]],
     color: ['#1976d2', [Validators.required]],
     measurementType: ['Front Wing Downforce']
