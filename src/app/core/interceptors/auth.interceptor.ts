@@ -20,7 +20,6 @@ export function authInterceptor(
 
   const token = auth.getToken();
 
-  // ✅ Check if token is expired before sending request
   if (token && auth.isTokenExpired(token)) {
     auth.logout();
     snack.open('Session expired. Please log in again.', 'Close', { duration: 4000 });

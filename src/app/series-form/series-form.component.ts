@@ -85,7 +85,7 @@ export class SeriesFormComponent implements OnInit {
         this.router.navigate(['/series']);
       },
       error: (err: any) => {
-        console.error('❌ Error saving series:', err);
+        console.error('Error saving series:', err);
         const msg = err.error?.title ?? 'Error saving series';
         this.snack.open(msg, 'Close', { duration: 4000 });
         this.loading = false;
